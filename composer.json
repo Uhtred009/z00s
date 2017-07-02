@@ -1,0 +1,29 @@
+{
+    "name": "olymbytes/z00s",
+    "description": "An implementation of laravel/passport using password OAuth grant type.",
+    "keywords": [
+        "olymbytes",
+        "oauth",
+        "passport",
+        "z00s"
+    ],
+    "homepage": "https://github.com/olymbytes/z00s",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Morten Poul Jensen",
+            "email": "mpj@foreno.dk"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.0",
+        "kitetail/zttp": "^0.1.0",
+        "illuminate/support": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Olymbytes\\Z00s\\": "src"
+        }
+    }
+}
