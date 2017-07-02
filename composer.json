@@ -25,5 +25,12 @@
         "psr-4": {
             "Olymbytes\\Z00s\\": "src"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Olymbytes\\Z00s\\ServiceProvider"
+            ]
+        }
     }
 }
