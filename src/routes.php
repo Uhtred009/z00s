@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 Route::group([
         'namespace' => 'Olymbytes\Z00s\Http\Controllers',
         'prefix' => 'api',
-        'middleware' => 'auth:api',
+        'middleware' => 'api',
     ],
     function () {
         Route::post('login', 'AuthController@login');
@@ -24,7 +24,7 @@ Route::group([
 
 Route::group([
         'namespace' => 'Olymbytes\Z00s\Http\Controllers',
-        'middleware' => 'auth:api',
+        'middleware' => 'api,auth:api',
     ], function () {
     	Route::post('logout', 'AuthController@logout');
     }
