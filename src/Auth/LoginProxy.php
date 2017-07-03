@@ -9,10 +9,10 @@ use Olymbytes\Z00s\Exceptions\InvalidCredentialsException;
 
 class LoginProxy
 {
-	public function attemptLogin($email, $password)
+	public function attemptLogin($username, $password)
 	{
 		$user = $this->getUserInstance()
-			->where('email', $email)
+			->where($this->getUsernameField(), $username)
 			->first();
 
 		if (is_null($user)) {
@@ -20,7 +20,7 @@ class LoginProxy
 		}
 
 		return $this->proxy('password', [
-			'username' => $email,
+			'username' => $username,
 			'password' => $password,
 		], $user);
 	}
@@ -34,7 +34,7 @@ class LoginProxy
 
 	public function attemptLogout()
 	{
-		$accessToken = Auth::user()->token();
+		$accessToken = $this->getAccessToken();
 
 		$refreshToken = DB::table('oauth_refresh_tokens')
 			->where('access_token_id', $accessToken->id)
@@ -47,7 +47,7 @@ class LoginProxy
 
 	public function proxy($grantType, array $data = [], $user)
 	{
-		$data = array_merge($data, $this->getClientCredentials(), [
+		$data = array_merge($data, $this->getClientCredentials($user), [
 			'grant_type'    => $grantType,
 		]);
 
@@ -60,10 +60,14 @@ class LoginProxy
 		return array_only($response->json(), ['access_token', 'expires_in', 'refresh_token', 'token_type']);
 	}
 
-	protected function getUserInstance()
+	/**
+	 * Get access token.
+	 * 
+	 * @return object
+	 */
+	protected function getAccessToken()
 	{
-		$userClass = config('auth.providers.users.model');
-		return new $userClass;
+		return Auth::user()->token();
 	}
 
 	/**
@@ -71,7 +75,7 @@ class LoginProxy
 	 * 
 	 * @return array
 	 */
-	protected function getClientCredentials()
+	protected function getClientCredentials($user)
 	{
 		$credentialsProviderClass = config('z00s.credentials.provider');
 
@@ -81,5 +85,26 @@ class LoginProxy
 			'client_id' 	=> $credentials->getClientId(),
 			'client_secret' => $credentials->getClientSecret(),
 		];
+	}
+
+	/**
+	 * Get the user instance.
+	 * 
+	 * @return object
+	 */
+	protected function getUserInstance()
+	{
+		$userClass = config('auth.providers.users.model');
+		return new $userClass;
+	}
+
+	/**
+	 * Get username field from the config.
+	 * 
+	 * @return string
+	 */
+	protected function getUsernameField()
+	{
+		return config('z00s.username_field');
 	}
 }
