@@ -25,6 +25,12 @@ class Credentials
      */
     protected $scope = null;
 
+    public function __construct($clientId, $clientSecret)
+    {
+        $this->clientId = $clientId;
+        $this->clientSecret = $clientSecret;
+    }
+
     /**
      * Get the value of The client’s ID
      *

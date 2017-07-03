@@ -11,8 +11,6 @@ class EnvFileProvider implements ProviderInterface
      */
     public function getCredentials($user): Credentials
     {
-        return (new Credentials())
-            ->setClientId(config('z00s.credentials.password_client_id'))
-            ->setClientSecret(config('z00s.credentials.password_client_secret'));
+        return new Credentials(config('z00s.credentials.password_client_id'), config('z00s.credentials.password_client_secret'));
     }
 }
