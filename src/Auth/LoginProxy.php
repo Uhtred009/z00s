@@ -77,9 +77,9 @@ class LoginProxy
 
         $credentials = (new $credentialsProviderClass())->getCredentials($user);
 
-        return [
-        	'client_id' 	=> $credentials->getClientId(),
-        	'client_secret' => $credentials->getClientSecret(),
-        ];
+		return [
+			'client_id' 	=> $credentials->getClientId(),
+			'client_secret' => $credentials->getClientSecret(),
+		];
 	}
 }
