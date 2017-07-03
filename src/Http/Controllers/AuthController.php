@@ -3,7 +3,7 @@
 namespace Olymbytes\Z00s\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Olymbytes\Z00s\LoginProxy;
+use Olymbytes\Z00s\Auth\LoginProxy;
 use Olymbytes\Z00s\Http\Requests\LoginRequest;
 use Illuminate\Routing\Controller as BaseController;
 
