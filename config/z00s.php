@@ -8,11 +8,12 @@ return [
     'credentials' => [
     	'password_client_id' => env('PASSWORD_CLIENT_ID', ''),
     	'password_client_secret' => env('PASSWORD_CLIENT_SECRET', ''),
+        
+        'provider' => Olymbytes\Z00s\Credentials\EnvFileProvider::class,
     ],
 
     /*
-     * Config based provider uses the credentials set in this file.
-     * User based provider fetches the client id and secret from the user. 
+     * The field to use as username.
      */
-    'provider' => 'config',
+    'username_field' => 'email',
 ];
