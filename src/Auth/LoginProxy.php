@@ -1,6 +1,6 @@
 <?php 
 
-namespace Olymbytes\Z00s;
+namespace Olymbytes\Z00s\Auth;
 
 use Zttp\Zttp;
 use Illuminate\Support\Facades\DB;
