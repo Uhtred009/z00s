@@ -2,7 +2,7 @@
 
 namespace Olymbytes\Z00s\Auth\Credentials;
 
-class Client
+class Credentials
 {
     /**
      *  The client’s ID
