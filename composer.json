@@ -19,11 +19,18 @@
     "require": {
         "php": "^7.0",
         "kitetail/zttp": "^0.1.0",
-        "illuminate/support": "^5.4"
+        "laravel/framework": "^5.4"
     },
     "autoload": {
         "psr-4": {
             "Olymbytes\\Z00s\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Olymbytes\\Z00s\\ServiceProvider"
+            ]
         }
     }
 }
