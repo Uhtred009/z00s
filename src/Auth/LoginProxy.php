@@ -22,7 +22,7 @@ class LoginProxy
 		return $this->proxy('password', [
 			'username' => $email,
 			'password' => $password,
-		]);
+		], $user);
 	}
 
 	public function attemptRefresh($refreshToken)
@@ -45,7 +45,7 @@ class LoginProxy
 		$accessToken->revoke();
 	}
 
-	public function proxy($grantType, array $data = [])
+	public function proxy($grantType, array $data = [], $user)
 	{
 		$data = array_merge($data, $this->getClientCredentials(), [
 			'grant_type'    => $grantType,
@@ -67,20 +67,19 @@ class LoginProxy
 	}
 
 	/**
-	 * @todo Implement fetching credentials from the user.
+	 * Get the client credentials from the provider.
+	 * 
 	 * @return array
 	 */
 	protected function getClientCredentials()
 	{
-		if (config('olymbytes-z00s.provider') == 'config') {
-			return [
-				'client_id'     => config('olymbytes-z00s.credentials.password_client_id'),
-				'client_secret' => config('olymbytes-z00s.credentials.password_client_secret'),
-			];
-		}
+		$credentialsProviderClass = config('z00s.credentials.provider');
 
-		if (config('olymbytes-z00s.provider') == 'user') {
-			// To do
-		}
+        $credentials = (new $credentialsProviderClass())->getCredentials($user);
+
+        return [
+        	'client_id' 	=> $credentials->getClientId(),
+        	'client_secret' => $credentials->getClientSecret(),
+        ];
 	}
 }
