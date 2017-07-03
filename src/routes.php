@@ -24,6 +24,6 @@ Route::group([
         'prefix' => 'api',
         'middleware' => 'auth:api',
     ], function () {
-    	Route::post('logout', 'AuthController@logout');
+        Route::post('logout', 'AuthController@logout');
     }
 );

@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Facade;
 
 class LoginProxy extends Facade
 {
-	protected static function getFacadeAccessor()
-	{
-		return 'LoginProxy';
-	}
+    protected static function getFacadeAccessor()
+    {
+        return 'LoginProxy';
+    }
 }

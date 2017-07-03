@@ -9,16 +9,16 @@ use Illuminate\Routing\Controller as BaseController;
 
 class AuthController extends BaseController
 {
-	public $loginProxy;
+    public $loginProxy;
 
-	public function __construct(LoginProxy $loginProxy)
-	{
-		$this->loginProxy = $loginProxy;
-	}
+    public function __construct(LoginProxy $loginProxy)
+    {
+        $this->loginProxy = $loginProxy;
+    }
 
     public function login(LoginRequest $request)
     {
-    	return $this->loginProxy->attemptLogin($request->email, $request->password);
+        return $this->loginProxy->attemptLogin($request->email, $request->password);
     }
 
     public function logout()
@@ -28,6 +28,6 @@ class AuthController extends BaseController
 
     public function refresh(Request $request)
     {
-    	return $this->loginProxy->attemptRefresh($request->refresh_token);
+        return $this->loginProxy->attemptRefresh($request->refresh_token);
     }
 }
