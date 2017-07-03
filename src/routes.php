@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | Olymbytes Z00s Routes
@@ -23,6 +21,7 @@ Route::group([
 
 Route::group([
         'namespace' => 'Olymbytes\Z00s\Http\Controllers',
+        'prefix' => 'api',
         'middleware' => 'auth:api',
     ], function () {
     	Route::post('logout', 'AuthController@logout');
