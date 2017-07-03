@@ -25,14 +25,14 @@ class Credentials
      */
     protected $scope = null;
 
-    public function __construct($clientId, $clientSecret)
+    public function __construct(string $clientId = '', string $clientSecret = '')
     {
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
     }
 
     /**
-     * Get the value of The client’s ID
+     * Get the client’s ID
      *
      * @return string
      */
@@ -42,7 +42,7 @@ class Credentials
     }
 
     /**
-     * Set the value of The client’s ID
+     * Set the client’s ID
      *
      * @param string client_id
      *
@@ -56,7 +56,7 @@ class Credentials
     }
 
     /**
-     * Get the value of The client’s secret
+     * Get the client’s secret
      *
      * @return string
      */
@@ -66,7 +66,7 @@ class Credentials
     }
 
     /**
-     * Set the value of The client’s secret
+     * Set the client’s secret
      *
      * @param string client_secret
      *
@@ -80,7 +80,7 @@ class Credentials
     }
 
     /**
-     * Get the value of A space-delimited list of requested scope permissions
+     * Get the requested scope permissions as a space-delimited list
      *
      * @return string
      */
@@ -90,7 +90,7 @@ class Credentials
     }
 
     /**
-     * Set the value of A space-delimited list of requested scope permissions
+     * Set the requested scope permissions as a space-delimited list
      *
      * @param string scope
      *
