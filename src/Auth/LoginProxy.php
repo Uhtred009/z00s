@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Olymbytes\Z00s\Auth;
 
@@ -62,7 +62,7 @@ class LoginProxy
 
     /**
      * Get access token.
-     * 
+     *
      * @return object
      */
     protected function getAccessToken()
@@ -72,7 +72,7 @@ class LoginProxy
 
     /**
      * Get the client credentials from the provider.
-     * 
+     *
      * @return array
      */
     protected function getClientCredentials($user)
@@ -84,12 +84,13 @@ class LoginProxy
         return [
             'client_id'     => $credentials->getClientId(),
             'client_secret' => $credentials->getClientSecret(),
+            'scope'         => $credentials->getScope(),
         ];
     }
 
     /**
      * Get the user instance.
-     * 
+     *
      * @return object
      */
     protected function getUserInstance()
@@ -100,7 +101,7 @@ class LoginProxy
 
     /**
      * Get username field from the config.
-     * 
+     *
      * @return string
      */
     protected function getUsernameField()
