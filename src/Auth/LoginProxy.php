@@ -75,7 +75,7 @@ class LoginProxy
 	{
 		$credentialsProviderClass = config('z00s.credentials.provider');
 
-        $credentials = (new $credentialsProviderClass())->getCredentials($user);
+		$credentials = (new $credentialsProviderClass())->getCredentials($user);
 
 		return [
 			'client_id' 	=> $credentials->getClientId(),
