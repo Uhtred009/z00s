@@ -2,6 +2,7 @@
 
 namespace Olymbytes\Z00s;
 
+use Olymbytes\Z00s\Auth\LoginProxy;
 use Illuminate\Support\ServiceProvider;
 
 class Z00sServiceProvider extends ServiceProvider
@@ -29,6 +30,8 @@ class Z00sServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('LoginProxy', function ($app) {
+            return new LoginProxy;
+        });
     }
 }
