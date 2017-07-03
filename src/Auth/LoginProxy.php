@@ -47,9 +47,7 @@ class LoginProxy
 
 	public function proxy($grantType, array $data = [])
 	{
-		$data = array_merge($data, [
-			'client_id'     => config('api.credentials.password_client_id'),
-			'client_secret' => config('api.credentials.password_client_secret'),
+		$data = array_merge($data, $this->getClientCredentials(), [
 			'grant_type'    => $grantType,
 		]);
 
@@ -66,5 +64,23 @@ class LoginProxy
 	{
 		$userClass = config('auth.providers.users.model');
 		return new $userClass;
+	}
+
+	/**
+	 * @todo Implement fetching credentials from the user.
+	 * @return array
+	 */
+	protected function getClientCredentials()
+	{
+		if (config('olymbytes-z00s.provider') == 'config') {
+			return [
+				'client_id'     => config('olymbytes-z00s.credentials.password_client_id'),
+				'client_secret' => config('olymbytes-z00s.credentials.password_client_secret'),
+			];
+		}
+
+		if (config('olymbytes-z00s.provider') == 'user') {
+			// To do
+		}
 	}
 }
