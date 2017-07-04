@@ -6,7 +6,7 @@ class EnvFileProvider implements ProviderInterface
 {
     /**
      * Get credentials for the $user.
-     * @param $user 
+     * @param $user
      * @return Credentials
      */
     public function getCredentials($user): Credentials
