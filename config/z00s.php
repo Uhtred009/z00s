@@ -8,8 +8,8 @@ return [
     'credentials' => [
         'password_client_id' => env('PASSWORD_CLIENT_ID', ''),
         'password_client_secret' => env('PASSWORD_CLIENT_SECRET', ''),
-        
-        'provider' => Olymbytes\Z00s\Credentials\EnvFileProvider::class,
+
+        'provider' => Olymbytes\Z00s\Auth\Credentials\EnvFileProvider::class,
     ],
 
     /*
