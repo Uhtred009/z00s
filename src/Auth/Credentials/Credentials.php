@@ -9,14 +9,14 @@ class Credentials
      *
      * @var string
      */
-    protected $client_id = null;
+    protected $clientId = null;
 
     /**
      *  The client’s secret
      *
      * @var string
      */
-    protected $client_secret = null;
+    protected $clientSecret = null;
 
     /**
      *  A space-delimited list of requested scope permissions
@@ -38,19 +38,19 @@ class Credentials
      */
     public function getClientId()
     {
-        return $this->client_id;
+        return $this->clientId;
     }
 
     /**
      * Set the client’s ID
      *
-     * @param string client_id
+     * @param string clientId
      *
      * @return self
      */
-    public function setClientId(string $client_id)
+    public function setClientId(string $clientId)
     {
-        $this->client_id = $client_id;
+        $this->clientId = $clientId;
 
         return $this;
     }
@@ -62,19 +62,19 @@ class Credentials
      */
     public function getClientSecret()
     {
-        return $this->client_secret;
+        return $this->clientSecret;
     }
 
     /**
      * Set the client’s secret
      *
-     * @param string client_secret
+     * @param string clientSecret
      *
      * @return self
      */
-    public function setClientSecret(string $client_secret)
+    public function setClientSecret(string $clientSecret)
     {
-        $this->client_secret = $client_secret;
+        $this->clientSecret = $clientSecret;
 
         return $this;
     }
