@@ -15,7 +15,6 @@
             "email": "mpj@foreno.dk"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": "^7.0",
         "kitetail/zttp": "^0.1.0",

@@ -5,9 +5,12 @@ namespace Olymbytes\Z00s\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class ResetPasswordController extends BaseController
 {
+    use ValidatesRequests;
+    
     public function sendResetLinkEmail(Request $request)
     {
         $this->validate($request, [
