@@ -16,6 +16,8 @@ Route::group([
     function () {
         Route::post('login', 'AuthController@login');
         Route::post('login/refresh', 'AuthController@refresh');
+        Route::post('password/email', 'ResetPasswordController@sendResetLinkEmail');
+        Route::post('password/reset', 'ResetPasswordController@reset');
     }
 );
 
