@@ -13,6 +13,11 @@ return [
     ],
 
     /*
+     * The prefix that should be used for the z00s routes.
+     */
+    'route_prefix' => 'api',
+
+    /*
      * The field to use as username.
      */
     'username_field' => 'email',
