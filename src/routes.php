@@ -25,7 +25,7 @@ Route::group([
 Route::group([
         'namespace' => 'Olymbytes\Z00s\Http\Controllers',
         'prefix' => config('z00s.route_prefix'),
-        'middleware' => 'api,auth:api',
+        'middleware' => ['api', 'auth:api'],
     ], function () {
         Route::post('logout', 'AuthController@logout');
     }
