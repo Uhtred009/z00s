@@ -13,6 +13,11 @@ return [
     ],
 
     /*
+     * The url to get access token, refresh token, etc. from.
+     */
+    'oauth_token_url' => env('OAUTH_TOKEN_URL', ''),
+
+    /*
      * The prefix that should be used for the z00s routes.
      */
     'route_prefix' => 'api',

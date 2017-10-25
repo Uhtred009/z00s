@@ -51,7 +51,7 @@ class LoginProxy
             'grant_type'    => $grantType,
         ]);
 
-        $response = Zttp::post(url('oauth/token'), $data);
+        $response = Zttp::post($this->getOauthTokenUrl(), $data);
 
         if (!$response->isSuccess()) {
             throw new InvalidCredentialsException;
@@ -86,6 +86,16 @@ class LoginProxy
             'client_secret' => $credentials->getClientSecret(),
             'scope'         => $credentials->getScope(),
         ];
+    }
+
+    /**
+     * Get the url to get the oauth tokens from.
+     *
+     * @return string
+     */
+    protected function getOauthTokenUrl()
+    {
+        return config('z00s.oauth_token_url');
     }
 
     /**
