@@ -3,14 +3,21 @@
 namespace Olymbytes\Z00s\Auth;
 
 use Zttp\Zttp;
+use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Failed;
+use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Attempting;
+use Illuminate\Auth\Events\Authenticated;
 use Olymbytes\Z00s\Exceptions\InvalidCredentialsException;
 
 class LoginProxy
 {
     public function attemptLogin($username, $password)
     {
+        event(new Attempting(compact('username', 'password'), false));
+
         $user = $this->getUserInstance()
             ->where($this->getUsernameField(), $username)
             ->first();
@@ -19,10 +26,15 @@ class LoginProxy
             throw new InvalidCredentialsException;
         }
 
-        return $this->proxy('password', [
+        $response = $this->proxy('password', [
             'username' => $username,
             'password' => $password,
         ], $user);
+
+        event(new Authenticated($user));
+        event(new Login($user, false));
+
+        return $response;
     }
 
     public function attemptRefresh($refreshToken)
@@ -34,6 +46,8 @@ class LoginProxy
 
     public function attemptLogout()
     {
+        $user = Auth::user();
+
         $accessToken = $this->getAccessToken();
 
         $refreshToken = DB::table('oauth_refresh_tokens')
@@ -43,6 +57,8 @@ class LoginProxy
             ]);
 
         $accessToken->revoke();
+
+        event(new Logout($user));
     }
 
     public function proxy($grantType, array $data = [], $user)
@@ -53,7 +69,8 @@ class LoginProxy
 
         $response = Zttp::post($this->getOauthTokenUrl(), $data);
 
-        if (!$response->isSuccess()) {
+        if (! $response->isSuccess()) {
+            event(new Failed($user, $data));
             throw new InvalidCredentialsException;
         }
 
