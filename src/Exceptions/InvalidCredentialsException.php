@@ -1,10 +1,9 @@
-<?php 
+<?php
 
 namespace Olymbytes\Z00s\Exceptions;
 
-use Exception;
+use Illuminate\Auth\AuthenticationException;
 
-class InvalidCredentialsException extends Exception
+class InvalidCredentialsException extends AuthenticationException
 {
-
 }
