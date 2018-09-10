@@ -16,7 +16,7 @@ class LoginProxy
 {
     public function attemptLogin($username, $password)
     {
-        event(new Attempting(compact('username', 'password'), false));
+        event(new Attempting($this->getGuard(), compact('username', 'password'), false));
 
         $user = $this->getUserInstance()
             ->where($this->getUsernameField(), $username)
@@ -31,8 +31,8 @@ class LoginProxy
             'password' => $password,
         ], $user);
 
-        event(new Authenticated($user));
-        event(new Login($user, false));
+        event(new Authenticated($this->getGuard(), $user));
+        event(new Login($this->getGuard(), $user, false));
 
         return $response;
     }
@@ -58,19 +58,19 @@ class LoginProxy
 
         $accessToken->revoke();
 
-        event(new Logout($user));
+        event(new Logout($this->getGuard(), $user));
     }
 
     public function proxy($grantType, array $data = [], $user)
     {
         $data = array_merge($data, $this->getClientCredentials($user), [
-            'grant_type'    => $grantType,
+            'grant_type' => $grantType,
         ]);
 
         $response = Zttp::post($this->getOauthTokenUrl(), $data);
 
         if (! $response->isSuccess()) {
-            event(new Failed($user, $data));
+            event(new Failed($this->getGuard(), $user, $data));
             throw new InvalidCredentialsException;
         }
 
@@ -134,5 +134,15 @@ class LoginProxy
     protected function getUsernameField()
     {
         return config('z00s.username_field');
+    }
+
+    /**
+     * Get the guard
+     *
+     * @return string
+     */
+    protected function getGuard()
+    {
+        return auth()->guard();
     }
 }
