@@ -61,7 +61,7 @@ class LoginProxy
         event(new Logout($this->getGuard(), $user));
     }
 
-    public function proxy($grantType, array $data = [], $user)
+    public function proxy($grantType, array $data = [], $user = null)
     {
         $data = array_merge($data, $this->getClientCredentials($user), [
             'grant_type' => $grantType,
@@ -92,7 +92,7 @@ class LoginProxy
      *
      * @return array
      */
-    protected function getClientCredentials($user)
+    protected function getClientCredentials($user = null)
     {
         $credentialsProviderClass = config('z00s.credentials.provider');
 
@@ -143,6 +143,6 @@ class LoginProxy
      */
     protected function getGuard()
     {
-        return auth()->guard();
+        return Auth::guard();
     }
 }
